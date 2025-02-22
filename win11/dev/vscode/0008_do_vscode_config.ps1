@@ -1,9 +1,7 @@
 # Define a list of VSCode settings (property names and their values)
 $configSettings = @{
     "explorer.compactFolders" = $false
-    # Add additional settings as needed, for example:
-    # "editor.fontSize" = 14
-    # "files.autoSave" = "afterDelay"
+    "editor.fontSize" = 14
 }
 
 # Define the path to VSCode's settings.json file
