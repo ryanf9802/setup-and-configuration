@@ -24,3 +24,5 @@ Only the top level steps must be completed- all subtasks (indented bullets/numbe
 	4. `0005` Git configuration
 	5. `0007` Configures terminal/prompt display
 	6. Reloads `~/.bashrc`
+4. PS `0008` VSCode Configuration
+5. PS `0006` VSCode Extensions
