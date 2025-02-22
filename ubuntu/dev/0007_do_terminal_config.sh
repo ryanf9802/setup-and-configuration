@@ -29,14 +29,14 @@ git_info() {
       ahead=0
     fi
     # Wrap escape sequences in \[ and \] so bash knows they are non-printing.
-    echo "${PURPLE}[${branch}|${ahead}]${NC}"
+    echo "${PURPLE}[${branch}|${ahead}]${NC} "
   fi
 }
 
 # Set the prompt.
 # The username@hostname is in green, the working directory in blue,
 # and Git info (if any) in purple.
-export PS1="\[${GREEN}\]\u@\h\[${NC}\]:\[${BLUE}\]\w\[${NC}\] \$(git_info) \$ "
+export PS1="\[${GREEN}\]\u@\h\[${NC}\]:\[${CYAN}\]\w\[${NC}\] \$(git_info)> "
 EOF
 
 echo "Terminal prompt configuration written to $PROMPT_FILE."

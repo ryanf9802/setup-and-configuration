@@ -1,6 +1,8 @@
 echo "Creating ~/workspace directory..."
 mkdir -p ~/workspace
 
+touch ~/.hushlogin
+
 echo "Establishing aliases..."
 source ~/setup/ubuntu/dev/0002_do_bash_aliases.sh
 
