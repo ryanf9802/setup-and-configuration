@@ -1,19 +1,30 @@
-# Define the path to VSCode's settings.json
-$settingsPath = "$env:APPDATA\Code\User\settings.json"
-
-# If the settings file doesn't exist, initialize an empty JSON object
-if (!(Test-Path $settingsPath)) {
-    $settings = @{}
-} else {
-    # Read the existing settings file as a raw string and convert from JSON
-    $json = Get-Content $settingsPath -Raw
-    $settings = $json | ConvertFrom-Json
+# Define a list of VSCode settings (property names and their values)
+$configSettings = @{
+    "explorer.compactFolders" = $false
+    # Add additional settings as needed, for example:
+    # "editor.fontSize" = 14
+    # "files.autoSave" = "afterDelay"
 }
 
-# Set explorer.compactFolders to false
-$settings."explorer.compactFolders" = $false
+# Define the path to VSCode's settings.json file
+$settingsPath = "$env:APPDATA\Code\User\settings.json"
 
-# Convert the updated settings back to JSON and write to the file
+# Load existing settings if the file exists, otherwise start with an empty object
+if (Test-Path $settingsPath) {
+    $json = Get-Content $settingsPath -Raw
+    $settings = $json | ConvertFrom-Json
+} else {
+    $settings = @{}
+}
+
+# Iterate over each property/value pair and add/update it in the settings object
+foreach ($key in $configSettings.Keys) {
+    $value = $configSettings[$key]
+    # Use Add-Member with -Force to update or add the property
+    $settings | Add-Member -MemberType NoteProperty -Name $key -Value $value -Force
+}
+
+# Convert the updated settings object back to JSON and write it to the file
 $settings | ConvertTo-Json -Depth 10 | Set-Content $settingsPath
 
-Write-Host "VSCode's explorer.compactFolders has been set to false."
+Write-Host "VSCode settings have been updated."
