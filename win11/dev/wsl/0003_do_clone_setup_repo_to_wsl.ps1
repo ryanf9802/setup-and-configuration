@@ -1,0 +1,1 @@
+wsl git clone https://github.com/ryanf9802/setup.git ~/setup
