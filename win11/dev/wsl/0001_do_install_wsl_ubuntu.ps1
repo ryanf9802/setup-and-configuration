@@ -4,7 +4,7 @@
 #   • Checks for admin rights
 #   • Enables WSL and Virtual Machine Platform (if not already enabled)
 #   • Removes any existing Ubuntu-22.04 installations from WSL
-#   • Installs Ubuntu-22.04 (via WSL)
+#   • Installs Ubuntu-22.04 (via WSL) without blocking further execution
 #   • Removes any existing Ubuntu-22.04 Windows Terminal profiles and adds a new one
 # =============================================================
 
@@ -65,9 +65,9 @@ if ($ubuntuDistros.Count -gt 0) {
     Write-Host "No existing Ubuntu-22.04 installation found."
 }
 
-# Install Ubuntu-22.04 distribution for WSL
+# Install Ubuntu-22.04 distribution for WSL without blocking further script execution
 Write-Host "Installing Ubuntu-22.04..."
-wsl --install -d "Ubuntu-22.04"
+Start-Process -FilePath "wsl.exe" -ArgumentList "--install -d Ubuntu-22.04" -NoNewWindow
 Write-Host "Ubuntu-22.04 installation initiated. Follow any on-screen prompts in the new distro console window."
 
 # Configure Windows Terminal Profile for Ubuntu-22.04
