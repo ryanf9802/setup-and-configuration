@@ -4,5 +4,5 @@ $extensions = @(
 )
 
 foreach ($extension in $extensions) {
-    code --install-extension $extension
+    code --install-extension --force $extension
 }
