@@ -16,6 +16,14 @@ if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
 $installedDistros = wsl.exe --list --quiet 2>$null
 $ubuntuDistros = $installedDistros -split "`n" | ForEach-Object { $_.Trim() } | Where-Object { $_ -match '(?i)ubuntu-22.04' }
 
+foreach ($distro in $ubuntuDistros) {
+    Write-Host "Terminating distro: $distro"
+    wsl.exe --terminate $distro
+
+    Write-Host "Unregistering distro: $distro"
+    wsl.exe --unregister $distro
+}
+
 if ($ubuntuDistros.Count -gt 0) {
     Write-Host "Found the following Ubuntu-22.04 installation(s):"
     foreach ($distro in $ubuntuDistros) {
