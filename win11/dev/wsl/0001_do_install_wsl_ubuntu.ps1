@@ -95,7 +95,6 @@ if (Test-Path $wtSettingsPath) {
             guid              = $ubuntuGuid
             name              = "Ubuntu-22.04"
             commandline       = "wsl.exe -d Ubuntu-22.04"
-            startingDirectory = "%USERPROFILE%"
             hidden            = $false
         }
         $json.profiles.list += $ubuntuProfile
