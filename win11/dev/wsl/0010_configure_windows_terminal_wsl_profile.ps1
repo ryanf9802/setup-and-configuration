@@ -20,51 +20,9 @@ if (Test-Path $wtSettingsPath) {
             exit
         }
 
-        # Define the custom color scheme name
-        $schemeName = "CustomDarkGray"
-
-        # Create a new scheme object with the desired background color
-        $newScheme = @{
-            name          = $schemeName
-            background    = "#2D2D2D"
-            foreground    = "#FFFFFF"  # Adjust as needed
-            black         = "#000000"
-            red           = "#C51E14"
-            green         = "#1DC121"
-            yellow        = "#C7C329"
-            blue          = "#0A2FC4"
-            purple        = "#C839C5"
-            cyan          = "#20C5C6"
-            white         = "#C7C7C7"
-            brightBlack   = "#686868"
-            brightRed     = "#FD6F6B"
-            brightGreen   = "#67F86F"
-            brightYellow  = "#FFFA72"
-            brightBlue    = "#6A76FB"
-            brightPurple  = "#FD7CFC"
-            brightCyan    = "#68FDFE"
-            brightWhite   = "#FFFFFF"
-        }
-
-        # Ensure the schemes section exists
-        if (-not $json.schemes) {
-            $json.schemes = @()
-        }
-
-        # Check if the scheme already exists, and update or add accordingly
-        $existingScheme = $json.schemes | Where-Object { $_.name -eq $schemeName }
-        if ($existingScheme) {
-            $existingScheme.background = "#2D2D2D"
-            Write-Host "Updated existing color scheme '$schemeName'."
-        }
-        else {
-            $json.schemes += $newScheme
-            Write-Host "Added new color scheme '$schemeName'."
-        }
-
-        # Update the profile to use the new color scheme
-        $profile.colorScheme = $schemeName
-        Write-Host "Profile 'Ubuntu-22.04' now uses the '$schemeName' color scheme."
+        # Set the profile's color scheme to "Dark+"
+        $profile.colorScheme = "Dark+"
+        Write-Host "Profile 'Ubuntu-22.04' now uses the 'Dark+' color scheme."
 
         # Write the updated settings back to the file
         $json | ConvertTo-Json -Depth 10 | Set-Content $wtSettingsPath
