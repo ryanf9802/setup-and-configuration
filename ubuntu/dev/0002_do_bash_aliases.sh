@@ -3,6 +3,7 @@
 # Define bash aliases
 cat <<'EOF' >>~/.bash_aliases
 alias l='ls -la --color=auto'
+alias grep='grep --color=auto'
 EOF
 
 # Ensure .bash_aliases is sourced in .bashrc
