@@ -15,4 +15,7 @@ source ~/setup/ubuntu/dev/0007_do_terminal_config.sh
 echo "Reloading .bashrc..."
 source ~/.bashrc
 
+echo "Installing and updating packages..."
+source ~/setup/ubuntu/common/0009_do_install_update_packages.sh
+
 echo "Initial setup complete."
