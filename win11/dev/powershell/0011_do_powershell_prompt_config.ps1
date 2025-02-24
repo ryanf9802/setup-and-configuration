@@ -38,7 +38,7 @@ function prompt {
     $hostname = [System.Environment]::MachineName
     $cwd = (Get-Location).Path
     $gitInfo = Get-GitInfo
-    return "$GREEN$username@$hostname$NC:$CYAN$cwd$NC $gitInfo> "
+    return "${GREEN}$username@$hostname${NC}:${CYAN}$cwd${NC} $gitInfo> "
 }
 '@
 
