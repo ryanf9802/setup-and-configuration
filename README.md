@@ -52,10 +52,6 @@ git clone https://github.com/ryanf9802/setup-and-configuration.git
 
 Each script is self-contained and can be executed independently. However, for a full system setup, follow the order outlined in the [Operation Steps](#operation-steps) section.
 
-### Contributing
-
-Contributions are welcome! Feel free to submit issues and pull requests to improve these scripts and introduce functionality.
-
 ## Operation Steps
 
 ### Powershell Setup
