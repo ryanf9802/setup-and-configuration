@@ -37,34 +37,19 @@ function Shorten-Path {
     param(
         [string]$Path
     )
-    $home = $env:USERPROFILE
-    if ($Path -eq $home) {
-       return "~"
-    }
-    elseif ($Path -like "$home*") {
-       $relativePath = $Path.Substring($home.Length)
-       if ($relativePath.StartsWith("\")) {
-           $relativePath = $relativePath.Substring(1)
-       }
-       $parts = $relativePath -split '\\' | Where-Object { $_ -ne "" }
-       if ($parts.Count -le 2) {
-           return "~" + (if ($relativePath) { "\" + $relativePath } else { "" })
-       } else {
-           $lastTwo = $parts[$parts.Count - 2] + "\" + $parts[$parts.Count - 1]
-           return "~\...\$lastTwo"
-       }
+    # Get the drive (e.g., "C:\")
+    $drive = [System.IO.Path]::GetPathRoot($Path)
+    # Remove the drive part and split the rest of the path
+    $rest = $Path.Substring($drive.Length)
+    $parts = $rest -split '\\' | Where-Object { $_ -ne "" }
+    # If there are 2 or fewer subdirectories, return the full path.
+    if ($parts.Count -le 2) {
+        return $Path
     }
     else {
-       $drive = [System.IO.Path]::GetPathRoot($Path)
-       $rest = $Path.Substring($drive.Length)
-       $parts = $rest -split '\\' | Where-Object { $_ -ne "" }
-       if ($parts.Count -le 2) {
-           return $Path
-       }
-       else {
-           $lastTwo = $parts[$parts.Count - 2] + "\" + $parts[$parts.Count - 1]
-           return "$drive...\$lastTwo"
-       }
+        # Otherwise, show only the last two folders.
+        $lastTwo = $parts[$parts.Count - 2] + "\" + $parts[$parts.Count - 1]
+        return " $drive...\$lastTwo"
     }
 }
 
