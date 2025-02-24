@@ -56,10 +56,6 @@ Each script is self-contained and can be executed independently. However, for a 
 
 Contributions are welcome! Feel free to submit issues and pull requests to improve these scripts and introduce functionality.
 
-### License
-
-This project is licensed under the MIT License.
-
 ## Operation Steps
 
 ### Powershell Setup
