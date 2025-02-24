@@ -1,5 +1,16 @@
 #!/bin/bash
 
+# Define patterns to exclude (these will all be set to true)
+EXCLUDE_PATTERNS=(
+    "**/node_modules"
+    "**/dist"
+    "**/.git"
+)
+
+# Compute a JSON object for the files.exclude setting from the list.
+# Each pattern becomes a key with the value true.
+EXCLUDE_JSON=$(printf '%s\n' "${EXCLUDE_PATTERNS[@]}" | jq -R . | jq -s 'map({(.): true}) | add')
+
 # Path to VSCode's settings.json file in WSL
 settingsPath="$HOME/.vscode-server/data/Machine/settings.json"
 
@@ -16,6 +27,7 @@ CONFIGS=(
     '.["gitlens.currentLine.dateFormat"] = "YYYY-MM-DD"'
     '.["workbench.remoteIndicator.showExtensionRecommendations"] = false'
     '.["extensions.ignoreRecommendations"] = true'
+    '.["files.exclude"] = ""'
 )
 
 # Build and apply the jq filter using the CONFIGS array.
