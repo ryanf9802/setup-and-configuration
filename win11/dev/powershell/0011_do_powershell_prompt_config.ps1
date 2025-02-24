@@ -49,7 +49,7 @@ function Shorten-Path {
     else {
         # Otherwise, show only the last two folders.
         $lastTwo = $parts[$parts.Count - 2] + "\" + $parts[$parts.Count - 1]
-        return "$drive...\\$lastTwo"
+        return "$drive...\$lastTwo"
     }
 }
 
