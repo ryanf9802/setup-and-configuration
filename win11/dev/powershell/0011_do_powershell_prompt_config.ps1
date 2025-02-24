@@ -1,29 +1,24 @@
 # Define the path for our custom prompt configuration file.
 $promptFile = "$env:USERPROFILE\powershell_prompt.ps1"
 
-# Write the prompt configuration to the file.
-@'
-# ANSI color definitions (using PowerShell escape sequence syntax)
-$RED    = "`e[0;31m"
-$GREEN  = "`e[1;32m"
-$YELLOW = "`e[0;33m"
-$BLUE   = "`e[0;34m"
-$PURPLE = "`e[1;35m"
-$CYAN   = "`e[0;36m"
-$WHITE  = "`e[0;37m"
-$NC     = "`e[0m"
+# Prepare the content with a placeholder <ESC> for the escape character.
+$content = @'
+$RED    = "<ESC>[0;31m"
+$GREEN  = "<ESC>[1;32m"
+$YELLOW = "<ESC>[0;33m"
+$BLUE   = "<ESC>[0;34m"
+$PURPLE = "<ESC>[1;35m"
+$CYAN   = "<ESC>[0;36m"
+$WHITE  = "<ESC>[0;37m"
+$NC     = "<ESC>[0m"
 
 function Get-GitInfo {
     try {
-        # Check if the current directory is inside a Git repository.
         git rev-parse --is-inside-work-tree > $null 2>&1
         if ($LASTEXITCODE -eq 0) {
-            # Retrieve the repository's top-level directory and extract its name.
             $repoPath = git rev-parse --show-toplevel 2>$null
             $repo = if ($repoPath) { Split-Path $repoPath -Leaf } else { "" }
-            # Get the current branch name.
             $branch = (git symbolic-ref --short HEAD 2>$null).Trim()
-            # If an upstream exists, count the number of commits ahead.
             if (git rev-parse --abbrev-ref "@{u}" > $null 2>&1) {
                 $ahead = (git rev-list --count "@{u}..HEAD" 2>$null).Trim()
             } else {
@@ -39,17 +34,20 @@ function Get-GitInfo {
 }
 
 function prompt {
-    # Retrieve the username, hostname, and current working directory.
     $username = [System.Environment]::UserName
     $hostname = [System.Environment]::MachineName
     $cwd = (Get-Location).Path
-    # Get Git status info if available.
     $gitInfo = Get-GitInfo
-    # Format the prompt: username@hostname in green, working directory in cyan,
-    # Git info in purple, followed by a '>'.
-    return "${GREEN}$username@$hostname${NC}:${CYAN}$cwd${NC} $gitInfo> "
+    return "$GREEN$username@$hostname$NC:$CYAN$cwd$NC $gitInfo> "
 }
-'@ | Out-File -FilePath $promptFile -Encoding UTF8
+'@
+
+# Replace the placeholder <ESC> with the actual escape character.
+$esc = [char]27
+$content = $content -replace "<ESC>", $esc
+
+# Write the content to the prompt file.
+$content | Out-File -FilePath $promptFile -Encoding UTF8
 
 Write-Output "PowerShell prompt configuration written to $promptFile."
 
