@@ -15,6 +15,7 @@ CONFIGS=(
     '.["editor.formatOnSaveMode"] = "modificationsIfAvailable"'
     '.["gitlens.currentLine.dateFormat"] = "YYYY-MM-DD"'
     '.["workbench.remoteIndicator.showExtensionRecommendations"] = false'
+    '.["extensions.ignoreRecommendations"] = true'
 )
 
 # Build and apply the jq filter using the CONFIGS array.
