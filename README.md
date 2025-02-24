@@ -6,7 +6,7 @@ Ryan Fitzpatrick
 
 Only the top level steps must be completed- all subtasks (indented bullets/numbers) are completed by the parent.
 
-1. PS `0001`
+1. [`0001`](./win11/dev/wsl/0001_do_install_wsl_ubuntu.ps1)
    1. Enable required windows features for WSL
       - WSL Feature
       - Virtual Machine Platform
