@@ -90,5 +90,4 @@ if ($profileContent -notcontains $dotSourceLine) {
     Write-Output "Prompt configuration sourcing already exists in $PROFILE."
 }
 
-# Reload your profile in the current session.
 . $PROFILE
