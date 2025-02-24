@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo -e "\e[33m [0007] Configuring terminal... \e[0m"
+
 cat <<'EOF' >"$PROMPT_FILE"
 # Terminal prompt configuration with colors and Git repository info
 
@@ -53,3 +55,5 @@ else
 fi
 
 source ~/.bashrc
+
+echo -e "\e[33m [0007] Successfully configured terminal. \e[0m"

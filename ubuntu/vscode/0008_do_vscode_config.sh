@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo -e "\e[33m [0008] Configuring VSCode settings... \e[0m"
+
 # Path to VSCode's settings.json file in WSL
 settingsPath="$HOME/.vscode-server/data/Machine/settings.json"
 
@@ -44,3 +46,5 @@ else
     rm "$tmpFile"
     exit 1
 fi
+
+echo -e "\e[33m [0008] Successfully configured VSCode settings. \e[0m"
