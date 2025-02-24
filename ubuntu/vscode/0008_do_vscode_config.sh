@@ -1,21 +1,8 @@
 #!/bin/bash
 
-# Define patterns to exclude (these will all be set to true)
-EXCLUDE_PATTERNS=(
-    "**/node_modules"
-    "**/dist"
-    "**/.git"
-)
-
-# Compute a JSON object for the files.exclude setting from the list.
-# Each pattern becomes a key with the value true.
-EXCLUDE_JSON=$(printf '%s\n' "${EXCLUDE_PATTERNS[@]}" | jq -R . | jq -s 'map({(.): true}) | add')
-
 # Path to VSCode's settings.json file in WSL
 settingsPath="$HOME/.vscode-server/data/Machine/settings.json"
 
-# Define our config updates as an array of jq filter expressions.
-# Note: Keys with dots must be quoted.
 CONFIGS=(
     '.["explorer.compactFolders"] = false'
     '.["editor.fontSize"] = 14'
@@ -30,7 +17,6 @@ CONFIGS=(
     '.["files.exclude"] = ""'
 )
 
-# Build and apply the jq filter using the CONFIGS array.
 updateSettings() {
     local filter=""
     for conf in "${CONFIGS[@]}"; do
@@ -43,13 +29,12 @@ updateSettings() {
     jq "$filter"
 }
 
-# Create the settings file with an empty JSON object if it doesn't exist
 if [ ! -f "$settingsPath" ]; then
     mkdir -p "$(dirname "$settingsPath")"
     echo "{}" >"$settingsPath"
 fi
 
-# Update settings: load the existing settings, apply changes, and write back to file
+# Load the existing settings, apply changes, write back to file
 tmpFile=$(mktemp)
 if updateSettings <"$settingsPath" >"$tmpFile"; then
     mv "$tmpFile" "$settingsPath"

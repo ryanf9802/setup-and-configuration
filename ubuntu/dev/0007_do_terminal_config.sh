@@ -1,9 +1,4 @@
 #!/bin/bash
-# This script configures your terminal prompt with colors and Git repository status.
-# It writes the configuration to ~/.bash_terminal and ensures that it’s sourced in your ~/.bashrc.
-# After running this script, please restart your terminal or run "source ~/.bashrc" for changes to take effect.
-
-PROMPT_FILE=~/.bash_terminal
 
 cat <<'EOF' >"$PROMPT_FILE"
 # Terminal prompt configuration with colors and Git repository info
@@ -43,7 +38,7 @@ EOF
 
 echo "Terminal prompt configuration written to $PROMPT_FILE."
 
-# Ensure that the prompt configuration is sourced in ~/.bashrc
+# Source prompt config in bashrc
 if ! grep -q "source ~/.bash_terminal" ~/.bashrc; then
   cat <<'EOF' >>~/.bashrc
 

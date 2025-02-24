@@ -1,7 +1,5 @@
-# Define the path for our custom prompt configuration file.
 $promptFile = "$env:USERPROFILE\powershell_prompt.ps1"
 
-# Prepare the content with a placeholder <ESC> for the escape character.
 $content = @'
 $RED    = "<ESC>[0;31m"
 $GREEN  = "<ESC>[1;32m"
