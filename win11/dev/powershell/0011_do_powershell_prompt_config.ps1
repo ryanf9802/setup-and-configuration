@@ -33,12 +33,34 @@ function Get-GitInfo {
     return ""
 }
 
+function Shorten-Path {
+    param(
+        [string]$Path
+    )
+    # Get the drive (e.g., "C:\")
+    $drive = [System.IO.Path]::GetPathRoot($Path)
+    # Remove the drive part and split the rest of the path
+    $rest = $Path.Substring($drive.Length)
+    $parts = $rest -split '\\' | Where-Object { $_ -ne "" }
+    # If there are 2 or fewer subdirectories, return the full path.
+    if ($parts.Count -le 2) {
+        return $Path
+    }
+    else {
+        # Otherwise, show only the last two folders.
+        $lastTwo = $parts[$parts.Count - 2] + "\" + $parts[$parts.Count - 1]
+        return "$drive...\\$lastTwo"
+    }
+}
+
 function prompt {
     $username = [System.Environment]::UserName
     $hostname = [System.Environment]::MachineName
     $cwd = (Get-Location).Path
+    # Use the helper function to shorten the working directory if needed.
+    $shortCwd = Shorten-Path $cwd
     $gitInfo = Get-GitInfo
-    return "${GREEN}$username@$hostname${NC}:${CYAN}$cwd${NC} $gitInfo> "
+    return "${GREEN}$username@$hostname${NC}:${CYAN}$shortCwd${NC} $gitInfo> "
 }
 '@
 
