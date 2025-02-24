@@ -31,7 +31,7 @@ git_info() {
       ahead=0
     fi
     # Wrap escape sequences in \[ and \] so bash knows they are non-printing.
-    echo "${PURPLE}[${repo} | ${branch}|${ahead}]${NC} "
+    echo "${PURPLE}[${repo} | ${branch} | ${ahead}]${NC} "
   fi
 }
 
