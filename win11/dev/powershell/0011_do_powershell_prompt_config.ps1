@@ -24,8 +24,8 @@ function Get-GitInfo {
             # Get the current branch name.
             $branch = (git symbolic-ref --short HEAD 2>$null).Trim()
             # If an upstream exists, count the number of commits ahead.
-            if (git rev-parse --abbrev-ref @{u} > $null 2>&1) {
-                $ahead = (git rev-list --count @{u}..HEAD 2>$null).Trim()
+            if (git rev-parse --abbrev-ref "@{u}" > $null 2>&1) {
+                $ahead = (git rev-list --count "@{u}..HEAD" 2>$null).Trim()
             } else {
                 $ahead = 0
             }
@@ -47,7 +47,7 @@ function prompt {
     $gitInfo = Get-GitInfo
     # Format the prompt: username@hostname in green, working directory in cyan,
     # Git info in purple, followed by a '>'.
-    return "$GREEN$username@$hostname$NC:$CYAN$cwd$NC $gitInfo> "
+    return "${GREEN}$username@$hostname${NC}:${CYAN}$cwd${NC} $gitInfo> "
 }
 '@ | Out-File -FilePath $promptFile -Encoding UTF8
 
