@@ -31,3 +31,7 @@
 ### [0014]
 
 ### [0015]() Uninstall all VSCode Extensions (.ps1)
+
+### TODO
+
+NeoVim setup and configuration (initialization file available at PS variable $NVIM_INIT on desktop)
