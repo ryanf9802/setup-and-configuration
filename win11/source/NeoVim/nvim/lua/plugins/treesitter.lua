@@ -11,6 +11,11 @@ return {
         "markdown_inline",
         "json",
         "vim",
+        "javascript",
+        "typescript",
+        "tsx",
+        "css",
+        "html",
       },
       highlight = {
         enable = true,

@@ -1,10 +1,10 @@
-# NeoVim Installation
+# NVIM Application Directory
 
-The `nvim` folder should be placed in `C:\Users\<Username>\AppData\Local`.
+The `nvim` folder should be placed in `C:\Users\ryanf\AppData\Local`.
 
-## Installation Instructions
+## Dependencies
 
-### Chocolatey
+### Chocolately
 
 > For managing/installing CLI tools/packages
 
@@ -17,15 +17,28 @@ iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocola
 
 Be sure to run `choco --version` afterwards to validate installation.
 
-### Neovim / Dependencies
+### Node.JS and NPM
 
 ```
-choco install neovim mingw ripgrep make -y
+choco install nodejs.install -y
 ```
 
-#### Install Validation
+### Ripgrep
 
-- `nvim`
-- `gcc --version`
-- `rg --version`
-- `make --version`
+> For telescope fuzzy finder live grep
+
+```
+choco install ripgrep -y
+```
+
+Run `rg --version` to validate installation.
+
+### Make
+
+> For improved fuzzy find matching
+
+```
+choco install make -y
+```
+
+Run `make --version` to validate installation.
